@@ -19,4 +19,10 @@ public class ProductServiceImpl extends ProductService {
         log.info(">>> fetching ALL products from DATABASE");
         return productRepository.findAll();
     }
+
+    public Product getProductById(Long id) {
+        log.info(">>> fetching product [{}] from DATABASE", id);
+        return productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found!"));
+    }
 }
