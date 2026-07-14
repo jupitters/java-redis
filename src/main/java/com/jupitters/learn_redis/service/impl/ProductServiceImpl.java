@@ -25,4 +25,15 @@ public class ProductServiceImpl extends ProductService {
         return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found!"));
     }
+
+    public Product createProduct(ProductRequest request) {
+        Product product = Product.builder()
+                .name(request.getName())
+                .description(request.getDescription())
+                .price(request.getPrice())
+                .stock(request.getStock())
+                .category(request.getCategory())
+                .build();
+        return productRepository.save(product);
+    }
 }
