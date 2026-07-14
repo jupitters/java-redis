@@ -27,6 +27,7 @@ public class ProductServiceImpl extends ProductService {
     }
 
     public Product createProduct(ProductRequest request) {
+        log.info(">>> creating new product: {}", request.getName());
         Product product = Product.builder()
                 .name(request.getName())
                 .description(request.getDescription())
