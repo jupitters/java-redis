@@ -39,6 +39,7 @@ public class ProductServiceImpl extends ProductService {
     }
 
     public Product updateProduct(Long productId, ProductRequest request) {
+        log.info(">>> updating product [{}] in DATABASE", productId);
         Product existing = getProductById(productId);
         existing.setName(request.getName());
         existing.setDescription(request.getDescription());
