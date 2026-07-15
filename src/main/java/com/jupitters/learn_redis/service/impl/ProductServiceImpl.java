@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ProductServiceImpl extends ProductService {
+public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     public List<Product> getAllProducts(){
@@ -53,5 +53,13 @@ public class ProductServiceImpl extends ProductService {
     public void deleteProduct(Long productId){
         log.info(">>> deleting product [{}] from DATABASE", productId);
         productRepository.deleteById(productId);
+    }
+
+    private void simulateSlowDbCall() {
+        try{
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 }
