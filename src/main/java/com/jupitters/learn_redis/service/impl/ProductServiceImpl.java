@@ -1,5 +1,6 @@
 package com.jupitters.learn_redis.service.impl;
 
+import com.jupitters.learn_redis.dto.ProductRequest;
 import com.jupitters.learn_redis.entity.Product;
 import com.jupitters.learn_redis.repository.ProductRepository;
 import com.jupitters.learn_redis.service.ProductService;
@@ -17,17 +18,20 @@ public class ProductServiceImpl implements ProductService {
 
     public List<Product> getAllProducts(){
         log.info(">>> fetching ALL products from DATABASE");
+        simulateSlowDbCall();
         return productRepository.findAll();
     }
 
     public Product getProductById(Long id) {
         log.info(">>> fetching product [{}] from DATABASE", id);
+        simulateSlowDbCall();
         return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found!"));
     }
 
     public Product createProduct(ProductRequest request) {
         log.info(">>> creating new product: {}", request.getName());
+        simulateSlowDbCall();
         Product product = Product.builder()
                 .name(request.getName())
                 .description(request.getDescription())
