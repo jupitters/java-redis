@@ -49,4 +49,9 @@ public class ProductServiceImpl extends ProductService {
 
         return productRepository.save(existing);
     }
+
+    public void deleteProduct(Long id){
+
+        productRepository.deleteById(id);
+    }
 }
