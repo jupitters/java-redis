@@ -50,8 +50,8 @@ public class ProductServiceImpl extends ProductService {
         return productRepository.save(existing);
     }
 
-    public void deleteProduct(Long id){
-
-        productRepository.deleteById(id);
+    public void deleteProduct(Long productId){
+        log.info(">>> deleting product [{}] from DATABASE", productId);
+        productRepository.deleteById(productId);
     }
 }

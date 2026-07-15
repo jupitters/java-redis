@@ -9,4 +9,5 @@ public interface ProductService {
     Product getProductById(Long id);
     Product createProduct(ProductRequest request);
     Product updateProduct(Long productId, ProductRequest request);
+    void deleteProduct(Long productId);
 }
