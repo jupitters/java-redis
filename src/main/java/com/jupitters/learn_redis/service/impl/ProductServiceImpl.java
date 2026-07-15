@@ -37,4 +37,15 @@ public class ProductServiceImpl extends ProductService {
                 .build();
         return productRepository.save(product);
     }
+
+    public Product updateProduct(Long productId, ProductRequest request) {
+        Product existing = getProductById(productId);
+        existing.setName(request.getName());
+        existing.setDescription(request.getDescription());
+        existing.setPrice(request.getPrice());
+        existing.setStock(request.getStock());
+        existing.setCategory(request.getCategory());
+
+        return productRepository.save(existing);
+    }
 }
