@@ -6,6 +6,7 @@ import com.jupitters.learn_redis.repository.ProductRepository;
 import com.jupitters.learn_redis.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll();
     }
 
+    @Cacheable(value = "products", key = "#id")
     public Product getProductById(Long id) {
         log.info(">>> fetching product [{}] from DATABASE", id);
         simulateSlowDbCall();
