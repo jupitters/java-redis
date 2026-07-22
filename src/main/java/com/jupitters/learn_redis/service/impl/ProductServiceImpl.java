@@ -6,6 +6,7 @@ import com.jupitters.learn_redis.repository.ProductRepository;
 import com.jupitters.learn_redis.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(product);
     }
 
+    @CachePut(value = "products", key = "#id")
     public Product updateProduct(Long productId, ProductRequest request) {
         log.info(">>> updating product [{}] in DATABASE", productId);
         Product existing = getProductById(productId);
