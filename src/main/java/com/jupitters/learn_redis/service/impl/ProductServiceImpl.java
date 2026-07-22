@@ -6,6 +6,7 @@ import com.jupitters.learn_redis.repository.ProductRepository;
 import com.jupitters.learn_redis.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(existing);
     }
 
+    @CacheEvict(value = "products", key = "#id")
     public void deleteProduct(Long productId){
         log.info(">>> deleting product [{}] from DATABASE", productId);
         productRepository.deleteById(productId);
